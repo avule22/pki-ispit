@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+  <a routerLink="/" class="app-title">
+    <mat-icon>theaters</mat-icon> Bioskop
+  </a>
+  <span class="spacer"></span>
+  <button mat-button routerLink="/movies">Filmovi</button>
+  <button mat-button routerLink="/search">Pretraga</button>
+  <button mat-button routerLink="/cart">
+    Korpa
+    <span *ngIf="(cartItemCount | async) !== null && (cartItemCount | async)! > 0" class="cart-badge">{{ cartItemCount | async }}</span>
+  </button>
+
+  <ng-container *ngIf="(isLoggedIn | async) as loggedIn; else loggedOut">
+    <button mat-button [matMenuTriggerFor]="profileMenu">
+      <mat-icon>account_circle</mat-icon>
+      <span *ngIf="(currentUser | async) as user">{{ user.firstName }}</span>
+    </button>
+    <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item (click)="goToProfile()">
+        <mat-icon>person</mat-icon>
+        <span>Moj Profil</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Odjavi se</span>
+      </button>
+    </mat-menu>
+  </ng-container>
+  <ng-template #loggedOut>
+    <button mat-button routerLink="/login">Prijavi se</button>
+    <button mat-button color="warn" routerLink="/register">
+      <mat-icon>person_add</mat-icon> Registruj se
+    </button>
+  </ng-template>
+</mat-toolbar>
+

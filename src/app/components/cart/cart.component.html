@@ -1,0 +1,90 @@
+<div class="cart-container">
+  <h2 class="page-title">Moja korpa</h2>
+
+  <div *ngIf="(isLoggedIn | async) as loggedIn; else notLoggedIn">
+    <ng-container *ngIf="loggedIn">
+      <ng-container *ngIf="(cartItems | async) as items; else noItemsContent">
+        <mat-card *ngIf="items.length === 0" class="no-items-message-card">
+          <mat-card-content class="no-items-message">
+            Vaša korpa je prazna.
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card *ngIf="items.length > 0" class="cart-summary-card">
+          <mat-list>
+            <ng-container *ngFor="let item of items">
+              <mat-list-item class="cart-item">
+                <img [src]="item.projection.posterPath" [alt]="item.projection.title" class="movie-poster-small">
+                <div class="item-main-content">
+                  <div class="item-title">{{ item.projection.title }}</div>
+
+                  <div class="item-details-group">
+                    <div class="item-detail-line">Količina: {{ item.quantity }}</div>
+                    <div class="item-detail-line">Cena po karti: {{ item.projection.ticketPrice | currency:'RSD ':'symbol':'1.2-2':'sr' }}</div>
+                    <div class="item-detail-line">Ukupno za film: {{ (item.projection.ticketPrice * item.quantity) | currency:'RSD ':'symbol':'1.2-2':'sr' }}</div>
+                    <div class="item-detail-line">
+                      Status:
+                      <span [ngClass]="{
+                        'status-reserved': item.status === 'rezervisano',
+
+                      }">
+                        {{ item.status | uppercase }}
+                      </span>
+                      <span class="item-reserved-at"> | Rezervisano: {{ item.reservedAt | date:'short' }}</span>
+                    </div>
+                  </div>
+
+
+                  <div class="review-section">
+                    <div class="rating-display" *ngIf="item.userRating !== undefined && item.userRating > 0; else noRatingYet">
+                      <span class="rating-label">Tvoja ocena:</span>
+                      <app-rating [rating]="item.userRating" [readonly]="true"></app-rating>
+                    </div>
+                    <ng-template #noRatingYet>
+                      <div class="rating-input-section">
+                        <mat-label>Oceni:</mat-label>
+                        <app-rating [rating]="0" (ratingChange)="updateRating(item.id, $event)"></app-rating>
+                      </div>
+                    </ng-template>
+                  </div>
+
+                  <div class="item-actions-wrapper">
+                    <button mat-raised-button color="warn" (click)="deleteItem(item.id)">
+                      Obriši
+                    </button>
+                  </div>
+                </div>
+              </mat-list-item>
+              <mat-divider class="item-divider"></mat-divider>
+            </ng-container>
+          </mat-list>
+
+          <mat-card-actions class="total-price-section">
+            <p class="total-price" *ngIf="(totalPrice | async) as total">Ukupna cena: {{ total | currency:'RSD ':'symbol':'1.2-2':'sr' }}</p>
+            <button mat-raised-button color="accent" (click)="purchaseItems()">
+              <mat-icon>shopping_cart</mat-icon> Kupi
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </ng-container>
+      <ng-template #noItemsContent>
+        <mat-card class="no-items-message-card">
+          <mat-card-content class="no-items-message">
+            Vaša korpa je prazna.
+          </mat-card-content>
+        </mat-card>
+      </ng-template>
+    </ng-container>
+  </div>
+
+  <ng-template #notLoggedIn>
+    <mat-card class="not-logged-in-card">
+      <mat-card-content class="not-logged-in-content">
+        <p>Morate biti prijavljeni da biste videli svoju korpu.</p>
+        <button mat-raised-button color="primary" (click)="goToLogin()">
+          Prijavi se
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+</div>

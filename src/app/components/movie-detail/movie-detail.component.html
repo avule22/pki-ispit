@@ -1,0 +1,107 @@
+<div class="movie-detail-container">
+  <div *ngIf="(movie | async) as movie; else loading">
+    <mat-card class="movie-card">
+      <div class="backdrop-container" [style.background-image]="'url(' + movie.backdropPath + ')'"></div>
+      <div class="content-wrapper">
+        <img [src]="movie.posterPath" [alt]="movie.title" class="movie-poster-detail">
+        <div class="movie-info">
+          <mat-card-title class="movie-title">{{ movie.title }}</mat-card-title>
+          <mat-card-subtitle class="movie-release-date">Datum izlaska: {{ movie.releaseDate | date:'longDate':'sr' }}</mat-card-subtitle>
+
+          <div class="movie-genres">
+            <mat-chip-row *ngFor="let genre of movie.genre" color="primary" highlighted>
+              {{ genre }}
+            </mat-chip-row>
+          </div>
+
+          <mat-card-content class="dark-background-content"> <p class="movie-description">{{ movie.description }}</p>
+            <div class="details-row">
+              <p><strong>Režiser:</strong>
+                <ng-container *ngIf="movie.director && movie.director !== 'N/A'; else directorLoading">
+                  {{ movie.director }}
+                </ng-container>
+                <ng-template #directorLoading>
+                  Učitavanje...
+                </ng-template>
+              </p>
+              <p><strong>Glumci:</strong>
+                <ng-container *ngIf="movie.actors && movie.actors.length > 0; else actorsLoading">
+                  {{ movie.actors.join(', ') }}
+                </ng-container>
+                <ng-template #actorsLoading>
+                  Učitavanje...
+                </ng-template>
+              </p>
+            </div>
+            <div class="details-row">
+              <p><strong>Trajanje:</strong>
+                <ng-container *ngIf="movie.duration && movie.duration !== 0; else durationLoading">
+                  {{ movie.duration }} min
+                </ng-container>
+                <ng-template #durationLoading>
+                  Učitavanje...
+                </ng-template>
+              </p>
+              <p><strong>Cena karte:</strong> {{ movie.ticketPrice | currency:'RSD ':'symbol':'1.2-2':'sr' }}</p>
+            </div>
+            <div class="details-row">
+              <p><strong>Ocena (TMDb):</strong> {{ movie.voteAverage | number:'1.1-1' }}/10 ({{ movie.voteCount }} glasova)</p>
+            </div>
+
+            <div class="projection-times">
+              <h3>Vremena projekcija:</h3>
+              <div *ngFor="let projection of movie.projectionDates" class="projection-date-block">
+                <p class="date-label">{{ projection.date | date:'mediumDate':'sr' }}:</p>
+                <div class="time-chips">
+                  <mat-chip-row *ngFor="let time of projection.times" color="accent" highlighted>
+                    {{ time }}
+                  </mat-chip-row>
+                </div>
+              </div>
+            </div>
+
+            <div class="reservation-section" *ngIf="(isLoggedIn | async); else loginToReserve">
+              <h3>Rezerviši karte:</h3>
+              <mat-form-field appearance="fill" class="quantity-input">
+                <mat-label>Količina karata</mat-label>
+                <input matInput type="number" [(ngModel)]="quantity" min="1" [max]="10" required>
+              </mat-form-field>
+              <button mat-raised-button color="primary" (click)="addMovieToCart(movie)" [disabled]="quantity < 1">
+                <mat-icon>add_shopping_cart</mat-icon> Dodaj u korpu
+              </button>
+            </div>
+            <ng-template #loginToReserve>
+              <mat-card class="login-prompt">
+                <mat-card-content>
+                  <p>Morate biti prijavljeni da biste rezervisali karte.</p>
+                  <button mat-raised-button color="accent" routerLink="/login">Prijavi se</button>
+                </mat-card-content>
+              </mat-card>
+            </ng-template>
+
+            <div class="user-reviews-section">
+              <h3>Recenzije korisnika:</h3>
+              <div *ngIf="movie.userReviews.length > 0; else noReviews">
+                <mat-list>
+                  <mat-list-item *ngFor="let review of movie.userReviews">
+                    <div matListItemTitle>{{ review.username }} <app-rating [rating]="review.rating" [readonly]="true"></app-rating></div>
+                    <div matListItemLine>{{ review.comment }}</div>
+                    <mat-divider></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+              </div>
+              <ng-template #noReviews>
+                <p>Nema još recenzija za ovaj film.</p>
+              </ng-template>
+            </div>
+          </mat-card-content>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <ng-template #loading>
+    <div class="loading-spinner">
+      <p>Učitavanje detalja filma...</p>
+    </div>
+  </ng-template>
+</div>

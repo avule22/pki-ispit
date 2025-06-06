@@ -1,0 +1,51 @@
+<div class="register-container">
+  <mat-card class="register-card">
+    <mat-card-title>Registrujte se</mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="register()">
+        <div class="form-row">
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Ime</mat-label>
+            <input matInput type="text" [(ngModel)]="user.firstName" name="firstName" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Prezime</mat-label>
+            <input matInput type="text" [(ngModel)]="user.lastName" name="lastName" required>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="fill" class="full-width-input">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="user.email" name="email" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width-input">
+          <mat-label>Telefon</mat-label>
+          <input matInput type="tel" [(ngModel)]="user.phone" name="phone">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width-input">
+          <mat-label>Adresa</mat-label>
+          <input matInput type="text" [(ngModel)]="user.address" name="address">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width-input">
+          <mat-label>Omiljeni žanrovi</mat-label>
+          <input matInput type="text" [(ngModel)]="favoriteGenresInput" name="favoriteGenres">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width-input">
+          <mat-label>Lozinka</mat-label>
+          <input matInput type="password" [(ngModel)]="user.password" name="password" required>
+        </mat-form-field>
+
+        <button mat-raised-button color="accent" type="submit" class="full-width-button">
+          Registruj se
+        </button>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="register-actions">
+      <p>Već imate nalog? <a routerLink="/login" mat-button color="primary">Prijavite se ovde</a></p>
+    </mat-card-actions>
+  </mat-card>
+</div>

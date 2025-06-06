@@ -1,0 +1,118 @@
+.movie-list-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.page-title {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #3f51b5;
+}
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  justify-content: center;
+}
+.movie-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+.movie-card:hover {
+  transform: translateY(-5px);
+}
+.movie-poster {
+  height: 350px;
+  object-fit: cover;
+  width: 100%;
+}
+mat-card-header {
+  padding: 15px;
+  padding-bottom: 5px;
+}
+mat-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+mat-card-subtitle {
+  color: #555;
+  font-size: 14px;
+  margin-top: 5px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+mat-card-content {
+  padding: 0 15px 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.movie-description p {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.description-text {
+    margin-bottom: 15px;
+}
+.no-description-text {
+    font-style: italic;
+    color: #777;
+}
+.movie-actions {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #eee;
+}
+.movie-actions button {
+  width: 80%;
+  padding: 10px 0;
+  font-size: 16px;
+}
+.no-movies-message, .loading-message {
+  text-align: center;
+  padding: 50px;
+  font-size: 20px;
+  color: #666;
+}
+
+@media (max-width: 900px) {
+  .movie-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .movie-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .movie-list-container {
+    padding: 10px;
+  }
+  .page-title {
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+  .movie-poster {
+    height: 300px;
+  }
+  .movie-card {
+      margin: 0 auto;
+      max-width: 350px;
+  }
+}

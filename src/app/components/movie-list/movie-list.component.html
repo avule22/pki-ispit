@@ -1,0 +1,48 @@
+<div class="movie-list-container">
+  <h2 class="page-title">Trenutno u Bioskopu</h2>
+  <div *ngIf="(movies$ | async) as movies; else loadingOrError">
+    <div class="movie-grid">
+      <mat-card *ngFor="let movie of movies" class="movie-card">
+        <img mat-card-image [src]="movie.posterPath" [alt]="movie.title" class="movie-poster">
+        <mat-card-header>
+          <mat-card-title>{{ movie.title }}</mat-card-title>
+          <mat-card-subtitle>{{ movie.genre.join(', ') }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="movie-description">
+          <p class="description-text" *ngIf="movie.description; else noDescription">
+            {{ movie.description | slice:0:150 }}...
+          </p>
+          <ng-template #noDescription>
+            <p class="description-text no-description-text">Opis nije dostupan na srpskom jeziku.</p>
+          </ng-template>
+          <p>
+            <strong>Režiser:</strong>
+            <ng-container *ngIf="movie.director && movie.director !== 'N/A'; else noDirector">
+              {{ movie.director }}
+            </ng-container>
+            <ng-template #noDirector>Nema podataka</ng-template>
+          </p>
+          <p>
+            <strong>Glumci:</strong>
+            <ng-container *ngIf="movie.actors && movie.actors.length > 0; else noActors">
+              {{ movie.actors.join(', ') }}
+            </ng-container>
+            <ng-template #noActors>Nema podataka</ng-template>
+          </p>
+          <p><strong>Ocena (TMDb):</strong> {{ movie.voteAverage | number:'1.1-1' }}/10 ({{ movie.voteCount }} glasova)</p>
+        </mat-card-content>
+        <mat-card-actions class="movie-actions">
+          <button mat-flat-button color="primary" [routerLink]="['/movie', movie.id]">Detalji</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div *ngIf="movies.length === 0" class="no-movies-message">
+      <p>Nema dostupnih filmova trenutno. Pokušajte ponovo kasnije.</p>
+    </div>
+  </div>
+  <ng-template #loadingOrError>
+    <div class="loading-message">
+      <p>Učitavanje filmova...</p>
+    </div>
+  </ng-template>
+</div>

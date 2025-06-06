@@ -1,0 +1,13 @@
+<div class="rating-container">
+  <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+    <mat-icon
+      class="star-icon"
+      [ngClass]="{'filled': star <= currentRating}"
+      (click)="!readonly && setRating(star)"
+      (mouseenter)="!readonly && hoverRating(star)"
+      (mouseleave)="!readonly && resetHover()">
+      {{ star <= currentRating ? 'star' : 'star_border' }}
+    </mat-icon>
+  </ng-container>
+  <span *ngIf="showText" class="rating-text">({{ currentRating }} / 5)</span>
+</div>

@@ -1,0 +1,28 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-title>Prijavite se</mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="login()">
+        <mat-form-field appearance="fill" class="full-width-input">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="email" name="email" required>
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width-input">
+          <mat-label>Lozinka</mat-label>
+          <input matInput type="password" [(ngModel)]="password" name="password" required>
+          <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" class="full-width-button">
+          Prijavi se
+        </button>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="login-actions">
+      <p>Nemate nalog? <a routerLink="/register" mat-button color="accent">Registrujte se ovde</a></p>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

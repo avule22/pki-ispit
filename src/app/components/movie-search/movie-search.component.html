@@ -1,0 +1,114 @@
+<div class="movie-search-container">
+  <h2 class="page-title">Pretraga Filmova</h2>
+
+  <mat-card class="search-card">
+    <mat-card-content>
+      <form (ngSubmit)="searchMovies()">
+        <div class="search-grid">
+          <mat-form-field appearance="fill">
+            <mat-label>Naziv</mat-label>
+            <input matInput type="text" [(ngModel)]="searchCriteria.title" name="title">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Opis</mat-label>
+            <input matInput type="text" [(ngModel)]="searchCriteria.description" name="description">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Žanr</mat-label>
+            <input matInput type="text" [(ngModel)]="searchCriteria.genre" name="genre">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Max. trajanje (min)</mat-label>
+            <input matInput type="number" [(ngModel)]="searchCriteria.duration" name="duration">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Režiser</mat-label>
+            <input matInput type="text" [(ngModel)]="searchCriteria.director" name="director">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Glumci</mat-label>
+            <input matInput type="text" [(ngModel)]="searchCriteria.actors" name="actors">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Datum izlaska</mat-label>
+            <input matInput [matDatepicker]="releasePicker" (dateChange)="onReleaseDateChange($event)" [ngModel]="searchCriteria.releaseDate" name="releaseDate">
+            <mat-datepicker-toggle matSuffix [for]="releasePicker"></mat-datepicker-toggle>
+            <mat-datepicker #releasePicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Datum projekcije</mat-label>
+            <input matInput [matDatepicker]="projectionPicker" (dateChange)="onProjectionDateChange($event)" [ngModel]="searchCriteria.projectionDate" name="projectionDate">
+            <mat-datepicker-toggle matSuffix [for]="projectionPicker"></mat-datepicker-toggle>
+            <mat-datepicker #projectionPicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Vreme projekcije (HH:MM)</mat-label>
+            <input matInput type="time" [(ngModel)]="searchCriteria.projectionTime" name="projectionTime">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Max. cena karte</mat-label>
+            <input matInput type="number" [(ngModel)]="searchCriteria.price" name="price">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Ključna reč u recenzijama</mat-label>
+            <input matInput type="text" [(ngModel)]="searchCriteria.reviewKeyword" name="reviewKeyword">
+          </mat-form-field>
+        </div>
+        <div class="search-actions">
+          <button mat-raised-button color="primary" type="submit">
+            <mat-icon>search</mat-icon> Pretraži
+          </button>
+          <button mat-stroked-button color="warn" type="button" (click)="clearSearch()">
+            <mat-icon>clear</mat-icon> Obriši pretragu
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <h3 class="results-title">Rezultati Pretrage</h3>
+  <div *ngIf="(searchResults | async)?.length === 0" class="no-results-message">
+    Nema rezultata za zadate kriterijume.
+  </div>
+
+  <div class="movie-grid">
+    <mat-card *ngFor="let movie of (searchResults | async)" class="movie-card">
+      <mat-card-header>
+        <mat-card-title>{{ movie.title }}</mat-card-title>
+        <mat-card-subtitle>{{ movie.genre.join(', ') }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="movie-description">{{ movie.description }}</p>
+        <mat-list dense>
+          <mat-list-item>
+            <mat-icon matListItemIcon>access_time</mat-icon>
+            <div matListItemTitle>Trajanje: {{ movie.duration }} min</div>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon matListItemIcon>person</mat-icon>
+            <div matListItemTitle>Režiser: {{ movie.director }}</div>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon matListItemIcon>star</mat-icon>
+            <div matListItemTitle>Glumci: {{ movie.actors.join(', ') || 'Nema podataka' }}</div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions class="movie-card-actions">
+        <button mat-raised-button color="primary" [routerLink]="['/movie', movie.id]">
+          Detalji i Rezervacija
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

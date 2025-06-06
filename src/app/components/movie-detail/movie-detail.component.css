@@ -1,0 +1,237 @@
+.movie-detail-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 20px auto;
+}
+.movie-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.backdrop-container {
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: center center;
+  filter: brightness(0.6);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  padding: 30px;
+  color: white;
+}
+.movie-poster-detail {
+  width: 250px;
+  height: 375px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin-right: 30px;
+  flex-shrink: 0;
+}
+.movie-info {
+  flex-grow: 1;
+}
+.movie-title {
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+.movie-release-date {
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 15px;
+}
+.movie-genres mat-chip-row {
+  margin-right: 8px;
+  margin-bottom: 8px;
+  background-color: #3f51b5;
+  color: white;
+  font-weight: 500;
+}
+mat-card-content.dark-background-content {
+  padding-top: 15px;
+  color: #eee;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.movie-description {
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+.details-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed rgba(255,255,255,0.2);
+}
+.details-row p {
+  margin: 0;
+  font-size: 16px;
+}
+.details-row strong {
+  color: #fff;
+}
+.projection-times h3, .reservation-section h3, .user-reviews-section h3 {
+  font-size: 24px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #fff;
+  border-bottom: 2px solid rgba(255,255,255,0.3);
+  padding-bottom: 5px;
+}
+.projection-date-block {
+  margin-bottom: 15px;
+}
+.date-label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #fff;
+}
+.time-chips mat-chip-row {
+  margin-right: 8px;
+  margin-bottom: 8px;
+  background-color: rgba(255, 159, 0, 0.8);
+  color: white;
+  font-weight: 500;
+}
+.reservation-section {
+  background-color: rgba(0,0,0,0.4);
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.quantity-input {
+  width: 150px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.quantity-input .mat-form-field-wrapper {
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 4px;
+}
+.quantity-input .mat-form-field-label, .quantity-input .mat-input-element {
+  color: white !important;
+}
+.quantity-input .mat-form-field-underline {
+  background-color: white !important;
+}
+.quantity-input .mat-form-field-ripple {
+  background-color: white !important;
+}
+.reservation-section button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+.login-prompt {
+  background-color: rgba(244, 67, 54, 0.8);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+.login-prompt button {
+  margin-top: 15px;
+}
+.user-reviews-section mat-list-item {
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.user-reviews-section mat-list-item .mat-list-item-content {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.user-reviews-section mat-list-item .mat-list-item-title {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #fff;
+}
+.user-reviews-section mat-list-item .mat-list-item-line {
+  color: #eee;
+  margin-top: 5px;
+}
+.user-reviews-section mat-divider {
+  border-top-color: rgba(255,255,255,0.2);
+}
+.no-reviews {
+  color: #eee;
+  font-style: italic;
+}
+.loading-spinner {
+  text-align: center;
+  padding: 50px;
+  font-size: 20px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  .movie-poster-detail {
+    margin-right: 0;
+    margin-bottom: 20px;
+    width: 200px;
+    height: 300px;
+  }
+  .movie-title {
+    font-size: 32px;
+    text-align: center;
+  }
+  .movie-release-date {
+    text-align: center;
+  }
+  .movie-genres {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+  .details-row {
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: none;
+  }
+  .details-row p {
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-detail-container {
+    padding: 10px;
+  }
+  .movie-title {
+    font-size: 28px;
+  }
+  .backdrop-container {
+    height: 200px;
+  }
+  .movie-poster-detail {
+    width: 150px;
+    height: 225px;
+  }
+}

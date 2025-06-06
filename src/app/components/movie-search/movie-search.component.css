@@ -1,0 +1,101 @@
+.movie-search-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.page-title {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #3f51b5;
+}
+.search-card {
+  padding: 20px;
+  margin-bottom: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.search-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.search-grid mat-form-field {
+  width: 100%;
+}
+.search-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+.search-actions button {
+  padding: 10px 25px;
+  font-size: 16px;
+}
+.results-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #3f51b5;
+}
+.no-results-message {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+  margin-top: 50px;
+}
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+.movie-card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.movie-card mat-card-title {
+  font-size: 22px;
+  font-weight: 500;
+  color: #333;
+}
+.movie-card mat-card-subtitle {
+  color: #666;
+}
+.movie-description {
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 72px;
+}
+.movie-card mat-list-item {
+  height: auto !important;
+  padding: 5px 0;
+}
+.movie-card mat-list-item mat-icon {
+  margin-right: 10px;
+  color: #777;
+}
+.movie-card-actions {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #eee;
+  margin-top: auto;
+}
+.movie-card-actions button {
+  width: 100%;
+}

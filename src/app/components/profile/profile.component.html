@@ -1,0 +1,51 @@
+<div class="profile-container">
+  <mat-card class="profile-card">
+    <mat-card-title>Moj profil</mat-card-title>
+    <mat-card-content *ngIf="(currentUser | async) as user; else notLoggedIn">
+      <form (ngSubmit)="updateProfile()">
+        <div class="form-row">
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Ime</mat-label>
+            <input matInput type="text" [(ngModel)]="user.firstName" name="firstName" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Prezime</mat-label>
+            <input matInput type="text" [(ngModel)]="user.lastName" name="lastName" required>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="fill" class="full-width-input">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="user.email" name="email" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width-input">
+          <mat-label>Telefon</mat-label>
+          <input matInput type="tel" [(ngModel)]="user.phone" name="phone">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width-input">
+          <mat-label>Adresa</mat-label>
+          <input matInput type="text" [(ngModel)]="user.address" name="address">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width-input">
+          <mat-label>Omiljeni žanrovi</mat-label>
+          <input matInput type="text" [(ngModel)]="favoriteGenresInput" name="favoriteGenres">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" class="full-width-button">
+          Sačuvaj promene
+        </button>
+      </form>
+    </mat-card-content>
+    <ng-template #notLoggedIn>
+      <mat-card-content class="not-logged-in-content">
+        <p>Morate biti prijavljeni da biste videli svoj profil.</p>
+        <button mat-raised-button color="primary" (click)="goToLogin()">
+          Prijavi se
+        </button>
+      </mat-card-content>
+    </ng-template>
+  </mat-card>
+</div>
